@@ -1,6 +1,6 @@
 module sigs.k8s.io/agent-sandbox
 
-go 1.22
+go 1.23
 
 require (
 	k8s.io/apimachinery v0.29.2
