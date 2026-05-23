@@ -20,3 +20,7 @@ require (
 
 // TODO: experiment with upgrading to k8s.io v0.30.x once controller-runtime
 // releases a compatible version (tracking: https://github.com/kubernetes-sigs/controller-runtime/issues/2937)
+
+// NOTE: using go.uber.org/zap v1.27.0 directly instead of relying solely on
+// the transitive dependency from controller-runtime, so I can control the
+// version independently for structured logging experiments.
