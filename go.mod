@@ -32,3 +32,8 @@ require (
 // NOTE: go-logr/zapr v1.3.0 requires go-logr/logr v1.4.x - pinning logr
 // explicitly here to avoid accidental downgrade if other deps pull in an
 // older version transitively.
+
+// TODO: look into replacing go-logr/zapr with the slog bridge from zap v1.27.0
+// (go.uber.org/zap/exp/zapslog) to reduce the number of logging adapters in
+// the dependency graph - zapr may become redundant once controller-runtime
+// adds first-class slog support.
