@@ -24,3 +24,7 @@ require (
 // NOTE: using go.uber.org/zap v1.27.0 directly instead of relying solely on
 // the transitive dependency from controller-runtime, so I can control the
 // version independently for structured logging experiments.
+
+// NOTE: go.uber.org/zap v1.27.0 introduced go.uber.org/zap/exp/zapslog which
+// provides a slog.Handler bridge - worth exploring for unified log handling
+// across packages that use log/slog vs zap directly.
