@@ -28,3 +28,7 @@ require (
 // NOTE: go.uber.org/zap v1.27.0 introduced go.uber.org/zap/exp/zapslog which
 // provides a slog.Handler bridge - worth exploring for unified log handling
 // across packages that use log/slog vs zap directly.
+
+// NOTE: go-logr/zapr v1.3.0 requires go-logr/logr v1.4.x - pinning logr
+// explicitly here to avoid accidental downgrade if other deps pull in an
+// older version transitively.
