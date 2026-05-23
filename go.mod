@@ -14,3 +14,6 @@ require (
 	github.com/go-logr/zapr v1.3.0
 	go.uber.org/zap v1.27.0
 )
+
+// Personal fork - pinning to go 1.23 for slices/maps stdlib improvements
+// See: https://tip.golang.org/doc/go1.23
