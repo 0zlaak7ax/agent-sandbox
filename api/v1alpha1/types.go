@@ -46,6 +46,11 @@ type AgentSandboxSpec struct {
 	// Env is a list of environment variables to set in the sandbox container.
 	// +optional
 	Env []EnvVar `json:"env,omitempty"`
+
+	// ServiceAccountName is the name of the ServiceAccount to use for the sandbox pod.
+	// Useful when the agent needs to interact with the Kubernetes API.
+	// +optional
+	ServiceAccountName string `json:"serviceAccountName,omitempty"`
 }
 
 // ResourceRequirements describes the compute resource requirements.
@@ -84,8 +89,3 @@ const (
 	// pod has not yet been scheduled.
 	AgentSandboxPhasePending AgentSandboxPhase = "Pending"
 
-	// AgentSandboxPhaseRunning means the sandbox pod has been bound to a node and
-	// the container is running.
-	AgentSandboxPhaseRunning AgentSandboxPhase = "Running"
-
-	// AgentSandboxPhaseSucceeded means the sandbox
