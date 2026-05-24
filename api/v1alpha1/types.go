@@ -57,6 +57,11 @@ type ResourceRequirements struct {
 	// Memory is the memory resource limit (e.g. "128Mi", "1Gi").
 	// +optional
 	Memory string `json:"memory,omitempty"`
+
+	// EphemeralStorage is the ephemeral storage limit (e.g. "1Gi", "10Gi").
+	// Useful for agent tasks that generate large intermediate files.
+	// +optional
+	EphemeralStorage string `json:"ephemeralStorage,omitempty"`
 }
 
 // EnvVar represents an environment variable present in the sandbox container.
@@ -83,8 +88,4 @@ const (
 	// the container is running.
 	AgentSandboxPhaseRunning AgentSandboxPhase = "Running"
 
-	// AgentSandboxPhaseSucceeded means the sandbox container has terminated with
-	// exit code 0.
-	AgentSandboxPhaseSucceeded AgentSandboxPhase = "Succeeded"
-
-	
+	// AgentSandboxPhaseSucceeded means the sandbox
