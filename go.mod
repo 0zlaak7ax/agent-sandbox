@@ -42,3 +42,7 @@ require (
 // controller-runtime's logr integration can be swapped for a direct slog
 // setup using slog.SetDefault - would simplify initialization in main.go
 // and remove the need for the logr shim entirely.
+
+// NOTE: k8s.io/apimachinery, k8s.io/client-go, and k8s.io/api are all pinned
+// to v0.29.2 - keep these in sync when upgrading to avoid subtle incompatibilities
+// between the apimachinery types and client-go request handling.
