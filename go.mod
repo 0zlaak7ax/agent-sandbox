@@ -37,3 +37,8 @@ require (
 // (go.uber.org/zap/exp/zapslog) to reduce the number of logging adapters in
 // the dependency graph - zapr may become redundant once controller-runtime
 // adds first-class slog support.
+
+// TODO: once the zapr -> zapslog migration is done, also evaluate whether
+// controller-runtime's logr integration can be swapped for a direct slog
+// setup using slog.SetDefault - would simplify initialization in main.go
+// and remove the need for the logr shim entirely.
