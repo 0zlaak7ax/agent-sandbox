@@ -38,7 +38,8 @@ type AgentSandboxSpec struct {
 	Resources ResourceRequirements `json:"resources,omitempty"`
 
 	// Timeout is the maximum duration the sandbox is allowed to run.
-	// Defaults to 10 minutes if not specified.
+	// Defaults to 30 minutes if not specified (increased from upstream default of 10m
+	// to better accommodate longer-running agent tasks in my use case).
 	// +optional
 	Timeout *metav1.Duration `json:"timeout,omitempty"`
 
@@ -86,57 +87,4 @@ const (
 	// exit code 0.
 	AgentSandboxPhaseSucceeded AgentSandboxPhase = "Succeeded"
 
-	// AgentSandboxPhaseFailed means the sandbox container has terminated with a
-	// non-zero exit code or was forcefully terminated.
-	AgentSandboxPhaseFailed AgentSandboxPhase = "Failed"
-)
-
-// AgentSandboxStatus defines the observed state of AgentSandbox.
-type AgentSandboxStatus struct {
-	// Phase is the current lifecycle phase of the sandbox.
-	// +optional
-	Phase AgentSandboxPhase `json:"phase,omitempty"`
-
-	// PodName is the name of the pod created for this sandbox.
-	// +optional
-	PodName string `json:"podName,omitempty"`
-
-	// StartTime is the time at which the sandbox container started running.
-	// +optional
-	StartTime *metav1.Time `json:"startTime,omitempty"`
-
-	// CompletionTime is the time at which the sandbox container finished running.
-	// +optional
-	CompletionTime *metav1.Time `json:"completionTime,omitempty"`
-
-	// Conditions represent the latest available observations of the sandbox's state.
-	// +optional
-	// +listType=map
-	// +listMapKey=type
-	Conditions []metav1.Condition `json:"conditions,omitempty"`
-}
-
-// +genclient
-// +kubebuilder:object:root=true
-// +kubebuilder:subresource:status
-// +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.phase`
-// +kubebuilder:printcolumn:name="Pod",type=string,JSONPath=`.status.podName`
-// +kubebuilder:printcolumn:name="Age",type=date,JSONPath=`.metadata.creationTimestamp`
-
-// AgentSandbox is the Schema for the agentsandboxes API.
-type AgentSandbox struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   AgentSandboxSpec   `json:"spec,omitempty"`
-	Status AgentSandboxStatus `json:"status,omitempty"`
-}
-
-// +kubebuilder:object:root=true
-
-// AgentSandboxList contains a list of AgentSandbox.
-type AgentSandboxList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []AgentSandbox `json:"items"`
-}
+	
