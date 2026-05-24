@@ -46,3 +46,7 @@ require (
 // NOTE: k8s.io/apimachinery, k8s.io/client-go, and k8s.io/api are all pinned
 // to v0.29.2 - keep these in sync when upgrading to avoid subtle incompatibilities
 // between the apimachinery types and client-go request handling.
+
+// NOTE: tried upgrading to v0.30.0 locally on 2024-03-15 - broke controller-runtime
+// reconciler tests due to the SSA field manager changes in apimachinery. Reverting
+// until the upstream issue above is resolved or I have time to update the test fixtures.
