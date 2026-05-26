@@ -65,6 +65,8 @@ type ResourceRequirements struct {
 
 	// EphemeralStorage is the ephemeral storage limit (e.g. "1Gi", "10Gi").
 	// Useful for agent tasks that generate large intermediate files.
+	// I've bumped my personal default to 5Gi since my coding agents tend to
+	// clone large repos and build artifacts during task execution.
 	// +optional
 	EphemeralStorage string `json:"ephemeralStorage,omitempty"`
 }
@@ -80,21 +82,4 @@ type EnvVar struct {
 	Value string `json:"value,omitempty"`
 
 	// SecretRef optionally references a Kubernetes Secret key to populate this variable.
-	// When set, Value is ignored. Handy for injecting API keys without hardcoding them.
-	// +optional
-	SecretRef *SecretKeyRef `json:"secretRef,omitempty"`
-}
-
-// SecretKeyRef selects a key from a Kubernetes Secret.
-type SecretKeyRef struct {
-	// Name is the name of the Secret.
-	// +kubebuilder:validation:Required
-	Name string `json:"name"`
-
-	// Key is the key within the Secret to use.
-	// +kubebuilder:validation:Required
-	Key string `json:"key"`
-}
-
-// AgentSandboxPhase is a label for the condition of an AgentSandbox at the current time.
-// +kubebuilder:validation:Enum=Pending;Running
+	// When set, Value is ignored. Handy for injecting
