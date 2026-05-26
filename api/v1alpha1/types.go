@@ -78,14 +78,23 @@ type EnvVar struct {
 	// Value of the environment variable.
 	// +optional
 	Value string `json:"value,omitempty"`
+
+	// SecretRef optionally references a Kubernetes Secret key to populate this variable.
+	// When set, Value is ignored. Handy for injecting API keys without hardcoding them.
+	// +optional
+	SecretRef *SecretKeyRef `json:"secretRef,omitempty"`
+}
+
+// SecretKeyRef selects a key from a Kubernetes Secret.
+type SecretKeyRef struct {
+	// Name is the name of the Secret.
+	// +kubebuilder:validation:Required
+	Name string `json:"name"`
+
+	// Key is the key within the Secret to use.
+	// +kubebuilder:validation:Required
+	Key string `json:"key"`
 }
 
 // AgentSandboxPhase is a label for the condition of an AgentSandbox at the current time.
-// +kubebuilder:validation:Enum=Pending;Running;Succeeded;Failed
-type AgentSandboxPhase string
-
-const (
-	// AgentSandboxPhasePending means the sandbox has been accepted but the underlying
-	// pod has not yet been scheduled.
-	AgentSandboxPhasePending AgentSandboxPhase = "Pending"
-
+// +kubebuilder:validation:Enum=Pending;Running
